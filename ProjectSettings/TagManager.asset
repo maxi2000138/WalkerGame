@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - PlayerSpawnPoint
+  - EnemySpawnPoint
   layers:
   - Default
   - TransparentFX
@@ -50,6 +53,9 @@ TagManager:
   - name: DownWall
     uniqueID: 3223029527
     locked: 0
-  - name: 
+  - name: Bullets
+    uniqueID: 1456633953
+    locked: 0
+  - name: Canvas
     uniqueID: 3558401031
     locked: 0
