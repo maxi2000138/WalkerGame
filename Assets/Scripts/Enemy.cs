@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     
     public void Construct(Player player, Config config)
     {
-        EnemyStateMachine = GetComponent<EnemyStateMachine>();
+        EnemyStateMachine = GetComponentInChildren<EnemyStateMachine>();
         EnemyMover = GetComponent<EnemyMover>();
         
         EnemyStateMachine.Construct(player);

@@ -63,11 +63,11 @@ public class EntryPoint : MonoBehaviour
         _gameFactory = new GameFactory();
         _persistantProgressService = new PersistantProgressService();
         _saveLoadService = new SaveLoadService(_gameFactory, _persistantProgressService);
+        _gameFactory.Cleanup();
     }
 
     private void LoadProgressOrInitNew()
     {
-        _gameFactory.Cleanup();
         _persistantProgressService.PlayerProgress = _saveLoadService.LoadProgress() ?? NewProgress();
     }
 
@@ -99,5 +99,6 @@ public class EntryPoint : MonoBehaviour
     public void LoadProgress()
     {
         _saveLoadService.LoadProgress();
+        _gameFactory.ProgressReaders.ForEach((progressReader => progressReader.LoadProgress(_persistantProgressService.PlayerProgress)));
     }
 }

@@ -8,6 +8,9 @@ public class DistanceTransition : Transition
     
     private void Update()
     {
+        if(Target == null)
+            return;
+        
         if (_isTransitionOnDistanceLess
             ? Vector2.Distance(transform.position, Target.transform.position) < _transitionRange 
             : Vector2.Distance(transform.position, Target.transform.position) > _transitionRange)

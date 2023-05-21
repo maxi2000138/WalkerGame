@@ -11,6 +11,11 @@ public class GameFactory
     {
         GameObject player = GameObject.Instantiate(Resources.Load(ResourcePathes.Player), spawnPoint.position,
             Quaternion.identity) as GameObject;
+        
+        IHealth health = player.GetComponent<IHealth>();
+        health.Current = 4f;
+        health.Max = 4f;
+        player.GetComponent<ActorUI>().Construct(health);
 
         RegisterProgressWatchers(player);
 
@@ -21,6 +26,11 @@ public class GameFactory
     {
         GameObject enemy = GameObject.Instantiate(Resources.Load(ResourcePathes.Enemy), spawnPoint.position,
             Quaternion.identity) as GameObject;
+
+        IHealth health = enemy.GetComponent<IHealth>();
+        health.Current = 3f;
+        health.Max = 3f;
+        enemy.GetComponent<ActorUI>().Construct(health);
 
         RegisterProgressWatchers(enemy);
 

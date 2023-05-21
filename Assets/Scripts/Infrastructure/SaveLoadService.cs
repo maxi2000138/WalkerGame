@@ -14,19 +14,21 @@ public class SaveLoadService
         filePath = Application.persistentDataPath + "/GameData.json";
     }
 
-    public void SaveProgress()
+    public async void SaveProgress()
     {
         _gameFactory.ProgressWriters.ForEach(progressWriters => 
             progressWriters.UpdateProgress(_progressService.PlayerProgress));
-        var file = File.Create(filePath);
-        File.WriteAllText(filePath, _progressService.PlayerProgress.ToJson());
+        
+        StreamWriter writer = new StreamWriter(filePath, false);
+        await writer.WriteAsync(_progressService.PlayerProgress.ToJson());
+        writer.Close();
+        Debug.Log(_progressService.PlayerProgress.ToJson() + "\n" + filePath);
     }
     public PlayerProgress LoadProgress()
     {
-        if (!File.Exists(filePath))
-            return null;
-
-        string jsonData = File.ReadAllText(filePath);
-        return jsonData.ToDeserialized<PlayerProgress>();
+        StreamReader reader = new StreamReader(filePath);
+        string line = reader.ReadLine();
+        Debug.Log(line.ToDeserialized<PlayerProgress>());
+        return line.ToDeserialized<PlayerProgress>();
     }
 }

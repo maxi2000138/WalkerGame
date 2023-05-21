@@ -5,6 +5,8 @@ public abstract class EnemyState : MonoBehaviour
 {
     [SerializeField] private List<Transition> _transitions;
 
+    public abstract void Construct(EnemyStateMachine enemyStateMachine);
+
     public void Enter(Player target)
     {
         if (enabled == false)

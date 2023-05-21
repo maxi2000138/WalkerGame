@@ -1,12 +1,18 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyStateMachine : MonoBehaviour
 {
+
+    [SerializeField] private EnemyMover _enemyMover;
+    [SerializeField] private Config _config;
     [SerializeField] private EnemyState _firstState;
 
     private EnemyState _currentState;
     private Player _player;
+    
+    public EnemyMover EnemyMover => _enemyMover;
+    public Config Config => _config;
+    public Player Player => _player;
 
 
     public void Construct(Player player)
@@ -25,8 +31,11 @@ public class EnemyStateMachine : MonoBehaviour
             return;
 
         EnemyState nextState = _currentState.GetState();
-        if(nextState != null)
+        if (nextState != null)
+        {
+            nextState.Construct(this);
             Transit(nextState);
+        }
     }
 
     private void Reset(EnemyState startState)

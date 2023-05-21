@@ -4,6 +4,5 @@ using UnityEngine;
 [Serializable]
 public class WorldData
 {
-    public Vector3Data Position { get; set; }
-
+    public Vector3Data Position;
 }
