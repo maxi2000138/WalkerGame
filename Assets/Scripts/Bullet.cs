@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -8,22 +6,22 @@ public class Bullet : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody2D;
     private float _damage;
     private float _flyTime;
-    private Config _config;
+    private float _bulletSpeed;
 
-    public void Construct(Vector2 position, Quaternion rotation, Config config)
+    public void Construct(Vector2 position, Quaternion rotation, BulletStaticData bulletStaticData)
     {
-        _config = config;
         transform.position = position;
         transform.rotation = rotation;
-        _damage = _config.PlayerDamage;
-        _flyTime = _config.BulletFlyTime;
-
+        _damage = bulletStaticData.Damage;
+        _flyTime = bulletStaticData.FlyTime;
+        _bulletSpeed = bulletStaticData.Speed;
+        
         StartCoroutine(DestroyCoroutine());
     }
 
     private void FixedUpdate()
     {
-        Vector3 newPosition = transform.position + transform.up * (_config.BulletSpeed * Time.fixedDeltaTime);
+        Vector3 newPosition = transform.position + transform.up * (_bulletSpeed * Time.fixedDeltaTime);
         _rigidbody2D.MovePosition(newPosition);
     }
 

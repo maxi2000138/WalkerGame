@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cf13130e52ccce42a638bc693959c08, type: 3}
-  m_Name: GameConfig
+  m_Script: {fileID: 11500000, guid: 64fa39bafc5dc41468f3bd687913bcfe, type: 3}
+  m_Name: Zombie
   m_EditorClassIdentifier: 
-  PlayerSpeed: 4
-  BulletSpeed: 9
-  EnemySpeed: 2
+  HP: 9
+  Damage: 1
+  Speed: 2.7
+  AttackDelay: 1.32
+  TypeId: 0
+  Prefab: {fileID: 6983678405877568669, guid: 1580c662dc67aa7488516ab9dcd4d91f, type: 3}

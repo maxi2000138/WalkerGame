@@ -4,14 +4,14 @@ public class EnemyStateMachine : MonoBehaviour
 {
 
     [SerializeField] private EnemyMover _enemyMover;
-    [SerializeField] private Config _config;
+    [SerializeField] private EnemyStaticData _enemyStaticData;
     [SerializeField] private EnemyState _firstState;
 
     private EnemyState _currentState;
     private Player _player;
     
     public EnemyMover EnemyMover => _enemyMover;
-    public Config Config => _config;
+    public EnemyStaticData EnemyStaticData => _enemyStaticData;
     public Player Player => _player;
 
 

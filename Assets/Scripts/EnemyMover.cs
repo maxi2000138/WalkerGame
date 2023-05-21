@@ -4,13 +4,13 @@ public class EnemyMover : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _rigidbody2D;
 
-    private Config _config;
     private Transform _playerTransform;
+    private float _enemySpeed;
     
-    public void Construct(Config config, Player player)
+    public void Construct(Player player, float enemySpeed)
     {
-        _config = config;
         _playerTransform = player.transform;
+        _enemySpeed = enemySpeed;
     }
     private void Awake()
     {
@@ -20,7 +20,7 @@ public class EnemyMover : MonoBehaviour
     public void MoveToPlayer(float deltaTime)
     {
         Vector2 pos = transform.position + (_playerTransform.position - transform.position).normalized *
-            (_config.EnemySpeed * deltaTime);
+            (_enemySpeed * deltaTime);
         _rigidbody2D.MovePosition(pos);
     }
 }

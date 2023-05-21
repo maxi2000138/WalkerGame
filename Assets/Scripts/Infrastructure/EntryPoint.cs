@@ -1,4 +1,3 @@
-using System;
 using Cinemachine;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -6,7 +5,6 @@ using UnityEngine;
 public class EntryPoint : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera _camera;
-    [SerializeField] private Config _config;
     [SerializeField] private CustomJoystick _joystick;
     [SerializeField] private ShootButton _shootButton;
     
@@ -16,59 +14,72 @@ public class EntryPoint : MonoBehaviour
     private PlayerInputRouter _playerInputRouter;
     private SaveLoadService _saveLoadService;
     private GameFactory _gameFactory;
+    private StaticDataService _staticDataService;
+    private ServiceLocator _serviceLocator = ServiceLocator.Container;
 
     private const string PlayerSpawnPointTag = "PlayerSpawnPoint";
     private const string EnemySpawnPointTag = "EnemySpawnPoint";
 
     private void Awake()
     {
-        InitServices();
-        
+        RegisterServices();
+        LoadStaticData();
         InitGameWorld();
         LoadProgressOrInitNew();
         InformProgressReaders();
-        
-        _player.Construct(_config);
-        _testEnemy.Construct(_player, _config);
-        _playerInputRouter = new PlayerInputRouter(_joystick, _player.PlayerMove, _player.PlayerGunRotater, _player.PlayerShoot, _shootButton);
+    }
+
+    private void LoadStaticData()
+    {
+        _serviceLocator.GetService<StaticDataService>().LoadStaticData();
     }
 
     private void InitGameWorld()
     {
+        _serviceLocator.GetService<GameFactory>().Cleanup();
         SpawnPlayer();
-        SpawnEnemy();
+        SpawnZombie();
+        InitInputRouter();
     }
 
-    private void SpawnEnemy()
+    private void InitInputRouter()
+    {
+        _playerInputRouter = new PlayerInputRouter(_joystick, _player.PlayerMove, _player.PlayerGunRotater,
+            _player.PlayerShoot, _shootButton);
+    }
+
+    private void SpawnZombie()
     {
         Transform enemySpawnPoint = GameObject.FindGameObjectWithTag(EnemySpawnPointTag).transform;
-        _testEnemy = _gameFactory.CreateEnemy(enemySpawnPoint);
+        _testEnemy = _serviceLocator.GetService<GameFactory>().CreateEnemy(enemySpawnPoint, EnemyTypeId.zombie);
     }
 
     private void InformProgressReaders()
     {
-        _gameFactory.ProgressReaders.ForEach(progressReader => 
-            progressReader.LoadProgress(_persistantProgressService.PlayerProgress));
+        _serviceLocator.GetService<GameFactory>().ProgressReaders.ForEach(progressReader => 
+            progressReader.LoadProgress(_serviceLocator.GetService<PersistantProgressService>().PlayerProgress));
     }
 
     private void SpawnPlayer()
     {
         Transform PlayerSpawnPoint = GameObject.FindGameObjectWithTag(PlayerSpawnPointTag).transform;
-        _player = _gameFactory.CreatePlayer(PlayerSpawnPoint);
+        _player = _serviceLocator.GetService<GameFactory>().CreatePlayer(PlayerSpawnPoint, PlayerTypeId.DefaultPlayer, BulletTypeId.DefaultBullet);
         _camera.Follow = _player.transform;
     }
 
-    private void InitServices()
+    private void RegisterServices()
     {
-        _gameFactory = new GameFactory();
-        _persistantProgressService = new PersistantProgressService();
-        _saveLoadService = new SaveLoadService(_gameFactory, _persistantProgressService);
-        _gameFactory.Cleanup();
+        _serviceLocator.RegisterService<StaticDataService>(new StaticDataService());        
+        _serviceLocator.RegisterService<GameFactory>(new GameFactory(_serviceLocator.GetService<StaticDataService>()));
+        _serviceLocator.RegisterService<PersistantProgressService>(new PersistantProgressService());
+        _serviceLocator.RegisterService<SaveLoadService>(new SaveLoadService
+                (_serviceLocator.GetService<GameFactory>()
+                ,_serviceLocator.GetService<PersistantProgressService>()));
     }
 
     private void LoadProgressOrInitNew()
     {
-        _persistantProgressService.PlayerProgress = _saveLoadService.LoadProgress() ?? NewProgress();
+        _serviceLocator.GetService<PersistantProgressService>().PlayerProgress = _serviceLocator.GetService<SaveLoadService>().LoadProgress() ?? NewProgress();
     }
 
     private PlayerProgress NewProgress() => 
@@ -100,5 +111,11 @@ public class EntryPoint : MonoBehaviour
     {
         _saveLoadService.LoadProgress();
         _gameFactory.ProgressReaders.ForEach((progressReader => progressReader.LoadProgress(_persistantProgressService.PlayerProgress)));
+    }
+    
+    [Button]
+    public void ResetProgress()
+    {
+        _saveLoadService.ResetProgress(NewProgress());
     }
 }

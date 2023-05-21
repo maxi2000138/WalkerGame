@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.IO;
 
-public class SaveLoadService
+public class SaveLoadService : IService
 {
     private readonly string filePath;
     private GameFactory _gameFactory;
@@ -12,6 +12,16 @@ public class SaveLoadService
         _gameFactory = gameFactory;
         _progressService = progressService;
         filePath = Application.persistentDataPath + "/GameData.json";
+    }
+
+    public async void ResetProgress(PlayerProgress defaultProgress)
+    {
+        _progressService.PlayerProgress = defaultProgress;
+        
+        StreamWriter writer = new StreamWriter(filePath, false);
+        await writer.WriteAsync(_progressService.PlayerProgress.ToJson());
+        writer.Close();
+        Debug.Log(_progressService.PlayerProgress.ToJson() + "\n" + filePath);
     }
 
     public async void SaveProgress()

@@ -1,25 +1,25 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMove))]
 [RequireComponent(typeof(PlayerGunRotater))]
 [RequireComponent(typeof(PlayerShoot))]
+[RequireComponent(typeof(PlayerHealth))]
 public class Player : MonoBehaviour, ISavedProgress
 {
     public PlayerMove PlayerMove { get; private set; }
     public PlayerShoot PlayerShoot { get; private set; }
     public PlayerGunRotater PlayerGunRotater { get; private set; }
-    public PlayerAttack PlayerAttack { get; private set;  }
+    public PlayerHealth PlayerHealth { get; private set; }
     
-    public void Construct(Config config)
+    public void Construct(PlayerStaticData playerStaticData, BulletStaticData bulletStaticData)
     {
         PlayerMove = GetComponent<PlayerMove>();
         PlayerShoot = GetComponent<PlayerShoot>();
         PlayerGunRotater = GetComponent<PlayerGunRotater>();
-        PlayerAttack = GetComponent<PlayerAttack>();
+        PlayerHealth = GetComponent<PlayerHealth>();
         
-        PlayerMove.Construct(config);
-        PlayerShoot.Construct(config);
+        PlayerMove.Construct(playerStaticData.Speed);
+        PlayerShoot.Construct(bulletStaticData);
     }
     
     public void LoadProgress(PlayerProgress playerProgress)

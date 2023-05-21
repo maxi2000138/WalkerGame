@@ -11,8 +11,8 @@ public class AttackState : EnemyState
 
     public override void Construct(EnemyStateMachine enemyStateMachine)
     {
-        _enemyDamage = enemyStateMachine.Config.EnemyDamage;
-        _secondsBeetweenAttacks = enemyStateMachine.Config.EnemyAttackDelay;
+        _enemyDamage = enemyStateMachine.EnemyStaticData.Damage;
+        _secondsBeetweenAttacks = enemyStateMachine.EnemyStaticData.AttackDelay;
         _playerHealth = enemyStateMachine.Player.GetComponent<PlayerHealth>();
     }
 

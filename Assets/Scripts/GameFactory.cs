@@ -1,44 +1,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameFactory
+public class GameFactory : IService
 {
     public List<ISavedProgress> ProgressWriters = new List<ISavedProgress>();
     public List<ISavedProgressReader> ProgressReaders = new List<ISavedProgressReader>();
+    private Player _player;
+    private StaticDataService _staticDataService;
 
-
-    public Player CreatePlayer(Transform spawnPoint)
+    public GameFactory(StaticDataService staticDataService)
     {
-        GameObject player = GameObject.Instantiate(Resources.Load(ResourcePathes.Player), spawnPoint.position,
-            Quaternion.identity) as GameObject;
+        _staticDataService = staticDataService;
+    }
+
+    public Player CreatePlayer(Transform spawnPoint, PlayerTypeId playerTypeId, BulletTypeId bulletTypeId)
+    {
+        PlayerStaticData staticData = _staticDataService.GetPlayer(playerTypeId);
+        GameObject playerObj = Object.Instantiate(staticData.Prefab, spawnPoint.position,
+            Quaternion.identity);
         
-        IHealth health = player.GetComponent<IHealth>();
-        health.Current = 4f;
-        health.Max = 4f;
-        player.GetComponent<ActorUI>().Construct(health);
+        IHealth health = playerObj.GetComponent<IHealth>();
+        health.Current = staticData.HP;
+        health.Max = staticData.HP;
+        playerObj.GetComponent<ActorUI>().Construct(health);
+        
+        _player = playerObj.GetComponent<Player>();
+        _player.Construct(staticData, _staticDataService.GetBullet(bulletTypeId));
+        
+        RegisterProgressWatchers(playerObj);
 
-        RegisterProgressWatchers(player);
-
-        return player.GetComponent<Player>();
+        return _player;
     }
     
-    public Enemy CreateEnemy(Transform spawnPoint)
+    public Enemy CreateEnemy(Transform spawnPoint, EnemyTypeId enemyTypeId)
     {
-        GameObject enemy = GameObject.Instantiate(Resources.Load(ResourcePathes.Enemy), spawnPoint.position,
-            Quaternion.identity) as GameObject;
+        EnemyStaticData enemyStaticData = _staticDataService.GetMonster(enemyTypeId);
+        GameObject enemyObj = Object.Instantiate(enemyStaticData.Prefab, spawnPoint.position,
+            Quaternion.identity);
 
-        IHealth health = enemy.GetComponent<IHealth>();
-        health.Current = 3f;
-        health.Max = 3f;
-        enemy.GetComponent<ActorUI>().Construct(health);
+        IHealth health = enemyObj.GetComponent<IHealth>();
+        health.Current = enemyStaticData.HP;
+        health.Max = enemyStaticData.HP;
+        enemyObj.GetComponent<ActorUI>().Construct(health);
+        
+        Enemy enemy = enemyObj.GetComponent<Enemy>();
+        enemy.Construct(_player, enemyStaticData);
 
-        RegisterProgressWatchers(enemy);
+        RegisterProgressWatchers(enemyObj);
 
-        return enemy.GetComponent<Enemy>();
+        return enemy;
     }
     
-    
-
     private void RegisterProgressWatchers(GameObject player)
     {
         foreach (ISavedProgressReader progressReader in player.GetComponentsInChildren<ISavedProgressReader>())

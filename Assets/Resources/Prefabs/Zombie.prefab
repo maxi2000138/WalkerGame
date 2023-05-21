@@ -570,12 +570,12 @@ GameObject:
   - component: {fileID: 7381000238568208013}
   - component: {fileID: 148903066}
   - component: {fileID: 148903067}
+  - component: {fileID: 5690792690439810803}
   - component: {fileID: -1220641762061082166}
   - component: {fileID: 4228434700154255451}
   - component: {fileID: 7092313049685711349}
-  - component: {fileID: 5690792690439810803}
   m_Layer: 6
-  m_Name: Enemy
+  m_Name: Zombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -671,6 +671,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody2D: {fileID: 7381000238568208013}
+--- !u!114 &5690792690439810803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6983678405877568669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974664423f6e1da45894f40ed7cffefb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody2D: {fileID: 0}
 --- !u!114 &-1220641762061082166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,19 +723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbafdfc6d2cc79e49842c17612cdbd28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5690792690439810803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6983678405877568669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 974664423f6e1da45894f40ed7cffefb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rigidbody2D: {fileID: 0}
 --- !u!1 &6983678406536427074
 GameObject:
   m_ObjectHideFlags: 0
