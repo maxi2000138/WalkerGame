@@ -1,4 +1,10 @@
-public class PersistantProgressService : IService
+using Data.DataObjects;
+using Infrastructure.DI;
+
+namespace Services
 {
-    public PlayerProgress PlayerProgress;
+    public class PersistantProgressService : IService
+    {
+        public PlayerProgress PlayerProgress;
+    }
 }

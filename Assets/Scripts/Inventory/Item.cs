@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class Item
+namespace Inventory
 {
-    private readonly Sprite _icon;
-
-    public Item(Sprite Icon)
+    public class Item
     {
-        _icon = Icon;
+        private readonly Sprite _icon;
+
+        public Item(Sprite Icon)
+        {
+            _icon = Icon;
+        }
     }
 }

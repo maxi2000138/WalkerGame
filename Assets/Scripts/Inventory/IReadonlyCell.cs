@@ -1,5 +1,8 @@
-public interface IReadonlyCell
+namespace Inventory
 {
-    Item Item { get; }
-    int Count { get; }    
+    public interface IReadonlyCell
+    {
+        Item Item { get; }
+        int Count { get; }    
+    }
 }

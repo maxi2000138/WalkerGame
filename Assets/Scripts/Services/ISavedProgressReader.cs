@@ -1,4 +1,9 @@
-public interface ISavedProgressReader
+using Data.DataObjects;
+
+namespace Services
 {
-    void LoadProgress(PlayerProgress playerProgress);
+    public interface ISavedProgressReader
+    {
+        void LoadProgress(PlayerProgress playerProgress);
+    }
 }
