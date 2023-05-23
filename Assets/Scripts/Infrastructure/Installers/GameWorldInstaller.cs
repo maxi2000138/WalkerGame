@@ -51,7 +51,6 @@ namespace Infrastructure.Installers
             _gameFactory.Cleanup();
             SpawnPlayer();
             InitSpawner();
-            //SpawnZombie();
             _saveArea.Construct(ServiceLocator.Container.GetService<SaveLoadService>()); //Delete or переделать!
             InitInputRouter();
             CreateAndInitInventory();
@@ -80,8 +79,7 @@ namespace Infrastructure.Installers
 
         private void InitInputRouter()
         {
-            _playerInputRouter = new PlayerInputRouter(_joystick, _player.PlayerMove, _player.PlayerGunRotater,
-                _player.PlayerShoot, _shootButton);
+            _playerInputRouter = new PlayerInputRouter(_joystick, _player, _shootButton);
         }
     }
 }

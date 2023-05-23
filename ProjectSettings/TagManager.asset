@@ -17,8 +17,8 @@ TagManager:
   - Enemy
   - Bullet
   - Hittable
-  - 
-  - 
+  - Player
+  - Pickup
   - 
   - 
   - 

@@ -1,3 +1,4 @@
+using Inventory.View;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,7 +6,7 @@ namespace UI
 {
     public class InventoryButton : MonoBehaviour
     {
-        [SerializeField] private GameObject InventoryPanel;
+        [SerializeField] private InventoryPresenter _inventoryPanel;
 
         private Button _button;
 
@@ -26,7 +27,10 @@ namespace UI
 
         public void OnButtonClick()
         {
-            InventoryPanel.SetActive(!InventoryPanel.activeInHierarchy);
+            if(_inventoryPanel.gameObject.activeInHierarchy)
+                _inventoryPanel.Close();
+            else
+                _inventoryPanel.Show();
         }
     }
 }

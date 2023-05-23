@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1501078228}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8651547159026745949}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1656508339797851379}
   - component: {fileID: 4369501491397870022}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: AK-74
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2964049689668587763}
   - component: {fileID: 2964049689668587762}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: RightElbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2964049690054142032}
   - component: {fileID: 2964049690054142035}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: LeftElbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2964049690075764858}
   - component: {fileID: 2964049690075764860}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2964049690134987524}
   - component: {fileID: 2964049690134987527}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: -3270459897795459899}
   - component: {fileID: 1445087395426307474}
   - component: {fileID: 8171401387303211288}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -691,7 +691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2964049690857945998}
   - component: {fileID: 2964049690857946097}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -775,7 +775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2964049690959231846}
   - component: {fileID: 2964049690959231849}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -860,7 +860,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2964049691210506595}
   - component: {fileID: 2964049691210506594}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -944,7 +944,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2964049691341125034}
   - component: {fileID: 2964049691341125037}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: RigthArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1030,7 +1030,7 @@ GameObject:
   - component: {fileID: 9149367405011461414}
   - component: {fileID: 4899960007073024815}
   - component: {fileID: 7337327076805751376}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Current
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1108,7 +1108,7 @@ GameObject:
   - component: {fileID: 7243281164843473184}
   - component: {fileID: 4363974074677256802}
   - component: {fileID: 8972272185895231597}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1222,7 +1222,7 @@ GameObject:
   - component: {fileID: 3580760646577832133}
   - component: {fileID: 5058113234752568727}
   - component: {fileID: 2701530303790137725}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1297,7 +1297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2594535764142528768}
   - component: {fileID: 327483576350594029}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: AK-74
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1384,7 +1384,7 @@ GameObject:
   - component: {fileID: 6210634381429977845}
   - component: {fileID: 6861274868362119608}
   - component: {fileID: 5598106341452097679}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: ShootArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

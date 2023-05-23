@@ -13,15 +13,16 @@ namespace Player
         private readonly ShootButton _shootButton;
         private bool _isJoystickMoved;
         private Vector2 _deltaVector2;
-    
+        private Player _player;
 
-        public PlayerInputRouter(CustomJoystick joystick, PlayerMove playerMove, PlayerGunRotater playerGunRotater, 
-            PlayerShoot playerShoot, ShootButton shootButton)
+
+        public PlayerInputRouter(CustomJoystick joystick, Player player, ShootButton shootButton)
         {
+            _player = player;
             _joystick = joystick;
-            _playerMove = playerMove;
-            _playerGunRotater = playerGunRotater;
-            _playerShoot = playerShoot;
+            _playerMove = player.PlayerMove;
+            _playerGunRotater = player.PlayerGunRotater;
+            _playerShoot = player.PlayerShoot;
             _shootButton = shootButton;
         }
 
@@ -43,6 +44,9 @@ namespace Player
 
         public void Update(float deltaTime)
         {
+            if(!_player)
+                return;
+            
             if (_isJoystickMoved)
             {
                 _deltaVector2 = new Vector2(_joystick.Horizontal, _joystick.Vertical);

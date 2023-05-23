@@ -36,6 +36,14 @@ namespace Inventory.Model
             OnInventoryChanged?.Invoke();
         }
 
+        public void RemoveItem(Item item)
+        {
+            Cell listCel = _cells.FirstOrDefault(cell => cell.Item.TypeId == item.TypeId);
+            
+            if (listCel != null)
+                _cells.Remove(listCel);
+        }
+
         public void LoadProgress(PlayerProgress playerProgress)
         {
             List<CellData> cells = playerProgress.Inventory.Cells;

@@ -38,6 +38,18 @@ namespace Inventory.View
             _inventory.OnInventoryChanged -= Render;
         }
 
+        public void Show() => 
+            gameObject.SetActive(true);
+
+        public void Close() => 
+            gameObject.SetActive(false);
+
+        public void RemoveItem(Item item)
+        {
+            _inventory.RemoveItem(item);
+            Render();
+        }
+
         [Button]
         private void ResetInventory()
         {
@@ -45,7 +57,7 @@ namespace Inventory.View
         }
 
         [Button]
-        private void AddApple()
+        private void AddApples()
         {
             Item item = _gameFactory.CreateLootItem(LootTypeId.Apple);
             _inventory.AddItem(item, 10);
@@ -60,6 +72,7 @@ namespace Inventory.View
             _inventory.Cells.ForEach(item =>
             {
                 CellPresenter cell = Instantiate(_cellPresenter, _container);
+                cell.Construct(this);
                 cell.Render(item);
             });
         }

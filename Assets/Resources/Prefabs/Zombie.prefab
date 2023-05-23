@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 5603757863275688778}
-  _transitionRange: 2
+  _transitionRange: 1
   _isTransitionOnDistanceLess: 1
 --- !u!114 &5603757863275688778
 MonoBehaviour:
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 4837491090399791138}
-  _transitionRange: 5
+  _transitionRange: 1.5
   _isTransitionOnDistanceLess: 0
 --- !u!1 &2758353010289285946
 GameObject:

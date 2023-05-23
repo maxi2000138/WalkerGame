@@ -40,8 +40,12 @@ namespace Infrastructure.Services
             writer.Close();
             Debug.Log(_progressService.PlayerProgress.ToJson() + "\n" + filePath);
         }
+        
         public PlayerProgress LoadProgress()
         {
+            if (!File.Exists(filePath))
+                return null;
+            
             StreamReader reader = new StreamReader(filePath);
             string line = reader.ReadLine();
             Debug.Log(line.ToDeserialized<PlayerProgress>());
