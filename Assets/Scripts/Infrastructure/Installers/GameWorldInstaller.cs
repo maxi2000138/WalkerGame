@@ -1,7 +1,9 @@
 using Cinemachine;
 using Data.TypeIds;
+using Infrastructure.DI;
 using Infrastructure.Services;
 using Input;
+using Inventory.View;
 using Player;
 using UI;
 using UnityEngine;
@@ -13,6 +15,9 @@ namespace Infrastructure.Installers
         [SerializeField] private CinemachineVirtualCamera _camera;
         [SerializeField] private CustomJoystick _joystick;
         [SerializeField] private ShootButton _shootButton;
+        [SerializeField] private InventoryPresenter _inventoryPresenter;
+        [SerializeField] private EnemySpawner _enemySpawner;
+        [SerializeField] private SaveArea _saveArea;
 
         private PlayerInputRouter _playerInputRouter;
         private Player.Player _player;
@@ -45,14 +50,25 @@ namespace Infrastructure.Installers
         {
             _gameFactory.Cleanup();
             SpawnPlayer();
-            SpawnZombie();
+            InitSpawner();
+            //SpawnZombie();
+            _saveArea.Construct(ServiceLocator.Container.GetService<SaveLoadService>()); //Delete or переделать!
             InitInputRouter();
+            CreateAndInitInventory();
         }
+
+        private void InitSpawner()
+        {
+            _enemySpawner.Construct(_gameFactory);
+        }
+
+        private void CreateAndInitInventory() => 
+            _inventoryPresenter.Construct(_gameFactory.CreateInventory());
 
         private void SpawnZombie()
         {
             Transform enemySpawnPoint = GameObject.FindGameObjectWithTag(EnemySpawnPointTag).transform;
-            _gameFactory.CreateEnemy(enemySpawnPoint, EnemyTypeId.zombie);
+            _gameFactory.CreateEnemy(enemySpawnPoint.position, EnemyTypeId.zombie);
         }
 
         private void SpawnPlayer()

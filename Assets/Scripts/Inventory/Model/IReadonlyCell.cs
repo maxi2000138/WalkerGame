@@ -1,4 +1,4 @@
-namespace Inventory
+namespace Inventory.Model
 {
     public interface IReadonlyCell
     {

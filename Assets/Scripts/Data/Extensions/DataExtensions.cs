@@ -1,3 +1,8 @@
+using System.Collections.Generic;
+using Data.DataObjects;
+using Infrastructure.DI;
+using Infrastructure.Services;
+using Inventory.Model;
 using UnityEngine;
 
 namespace Data.Extensions
@@ -14,5 +19,24 @@ namespace Data.Extensions
         
                 public static string ToJson(this object obj) => 
                         JsonUtility.ToJson(obj);
+
+                public static List<Cell> ToInventoryList(this List<CellData> list)
+                {
+                        List<Cell> inventoryList = new List<Cell>(list.Count);
+                        list.ForEach(item => 
+                                inventoryList.Add(new Cell(ServiceLocator
+                                        .Container
+                                        .GetService<GameFactory>()
+                                        .CreateLootItem(item.LootTypeId), item.Count)));
+
+                        return inventoryList;
+                }
+                
+                public static List<CellData> ToInventoryDataList(this List<Cell> list)
+                {
+                        List<CellData> cells = new List<CellData>(list.Count);
+                        list.ForEach(item => cells.Add(new CellData(item)));
+                        return cells;
+                }
         }
 }

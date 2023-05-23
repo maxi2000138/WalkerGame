@@ -3,6 +3,8 @@ using Data.CustomStaticData;
 using Data.TypeIds;
 using HP;
 using Infrastructure.DI;
+using Inventory.Model;
+using Pathes;
 using Services;
 using UI;
 using UnityEngine;
@@ -15,6 +17,7 @@ namespace Infrastructure.Services
         public List<ISavedProgressReader> ProgressReaders = new List<ISavedProgressReader>();
         private Player.Player _player;
         private StaticDataService _staticDataService;
+        private Inventory.Model.Inventory _inventory;
 
         public GameFactory(StaticDataService staticDataService)
         {
@@ -40,10 +43,10 @@ namespace Infrastructure.Services
             return _player;
         }
     
-        public Enemy.Enemy CreateEnemy(Transform spawnPoint, EnemyTypeId enemyTypeId)
+        public Enemy.Enemy CreateEnemy(Vector2 spawnPosition, EnemyTypeId enemyTypeId)
         {
             EnemyStaticData enemyStaticData = _staticDataService.GetMonster(enemyTypeId);
-            GameObject enemyObj = Object.Instantiate(enemyStaticData.Prefab, spawnPoint.position,
+            GameObject enemyObj = Object.Instantiate(enemyStaticData.Prefab, spawnPosition,
                 Quaternion.identity);
 
             IHealth health = enemyObj.GetComponent<IHealth>();
@@ -52,11 +55,33 @@ namespace Infrastructure.Services
             enemyObj.GetComponent<ActorUI>().Construct(health);
         
             Enemy.Enemy enemy = enemyObj.GetComponent<Enemy.Enemy>();
-            enemy.Construct(_player, enemyStaticData);
-
+            enemy.Construct(_player, enemyStaticData, this);
             RegisterProgressWatchers(enemyObj);
 
             return enemy;
+        }
+
+        public Item CreateLootItem(LootTypeId typeId)
+        {
+            LootStaticData lootStaticData = _staticDataService.GetLootItem(typeId);
+            return new Item(lootStaticData.Icon, typeId);
+        }
+
+        public GameObject CreateLootGameObject(LootTypeId typeId, Transform transform)
+        {
+            LootStaticData lootStaticData = _staticDataService.GetLootItem(typeId);
+            GameObject prefab = Resources.Load(ResourcePathes.LootPrefab) as GameObject;
+            GameObject gameObject = Object.Instantiate(prefab, transform.position, Quaternion.identity);
+            LootObject lootObject = gameObject.GetComponent<LootObject>();
+            lootObject.Construct(new Item(lootStaticData.Icon, typeId), _inventory);
+            return gameObject;
+        }
+
+        public Inventory.Model.Inventory CreateInventory()
+        {
+            _inventory = new Inventory.Model.Inventory();
+            Register(_inventory);
+            return _inventory;
         }
     
         private void RegisterProgressWatchers(GameObject player)

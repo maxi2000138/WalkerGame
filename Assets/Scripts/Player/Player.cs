@@ -16,6 +16,8 @@ namespace Player
         public PlayerShoot PlayerShoot { get; private set; }
         public PlayerGunRotater PlayerGunRotater { get; private set; }
         public PlayerHealth PlayerHealth { get; private set; }
+        
+        public PlayerAimRangeDrawer PlayerAimRangeDrawer{get; private set; }
     
         public void Construct(PlayerStaticData playerStaticData, BulletStaticData bulletStaticData)
         {
@@ -23,9 +25,12 @@ namespace Player
             PlayerShoot = GetComponent<PlayerShoot>();
             PlayerGunRotater = GetComponent<PlayerGunRotater>();
             PlayerHealth = GetComponent<PlayerHealth>();
+            PlayerAimRangeDrawer = GetComponentInChildren<PlayerAimRangeDrawer>();
         
             PlayerMove.Construct(playerStaticData.Speed);
             PlayerShoot.Construct(bulletStaticData);
+            PlayerGunRotater.Construct(playerStaticData.AutoAimDistance);
+            PlayerAimRangeDrawer.Construct(playerStaticData.AutoAimDistance);
         }
     
         public void LoadProgress(PlayerProgress playerProgress)

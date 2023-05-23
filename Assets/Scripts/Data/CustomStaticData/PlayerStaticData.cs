@@ -8,6 +8,7 @@ namespace Data.CustomStaticData
     {
         public int HP;
         public float Speed = 1f;
+        public float AutoAimDistance = 5f;
 
         public PlayerTypeId TypeId;
     

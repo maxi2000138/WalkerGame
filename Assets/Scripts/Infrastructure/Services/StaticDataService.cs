@@ -13,6 +13,7 @@ namespace Infrastructure.Services
         private Dictionary<EnemyTypeId,EnemyStaticData> _enemies;
         private Dictionary<PlayerTypeId,PlayerStaticData> _players;
         private Dictionary<BulletTypeId,BulletStaticData> _bullets;
+        private Dictionary<LootTypeId, LootStaticData> _loots;
 
         public void LoadStaticData()
         {
@@ -26,6 +27,10 @@ namespace Infrastructure.Services
         
             _bullets = Resources
                 .LoadAll<BulletStaticData>(ResourcePathes.BulletStaticData)
+                .ToDictionary(x => x.TypeId, x => x);
+            
+            _loots = Resources
+                .LoadAll<LootStaticData>(ResourcePathes.LootStaticData)
                 .ToDictionary(x => x.TypeId, x => x);
         }
 
@@ -41,6 +46,11 @@ namespace Infrastructure.Services
     
         public BulletStaticData GetBullet(BulletTypeId bulletTypeId) => 
             _bullets.TryGetValue(bulletTypeId, out BulletStaticData staticData) 
+                ? staticData 
+                : null;
+        
+        public LootStaticData GetLootItem(LootTypeId lootType) => 
+            _loots.TryGetValue(lootType, out LootStaticData staticData) 
                 ? staticData 
                 : null;
     }

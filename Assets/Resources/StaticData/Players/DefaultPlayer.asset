@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DefaultPlayer
   m_EditorClassIdentifier: 
   HP: 10
-  Speed: 3
+  Speed: 5
   TypeId: 0
   Prefab: {fileID: 2964049690639021739, guid: 1b114663512a10945acaa9b0cd74f411, type: 3}

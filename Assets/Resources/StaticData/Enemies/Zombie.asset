@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 9
   Damage: 1
-  Speed: 2.7
+  Speed: 2.1
   AttackDelay: 1.32
   TypeId: 0
   Prefab: {fileID: 6983678405877568669, guid: 1580c662dc67aa7488516ab9dcd4d91f, type: 3}
