@@ -735,7 +735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.70980394}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -25771,12 +25771,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 57.3
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 57.3
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -25866,11 +25866,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7018548401002850595, guid: 6ee82a91816573743832411a9dd3c7b0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1000
+      value: 1701.16
       objectReference: {fileID: 0}
     - target: {fileID: 7018548401002850595, guid: 6ee82a91816573743832411a9dd3c7b0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 346.90002
+      value: 301.9
       objectReference: {fileID: 0}
     - target: {fileID: 7018548401002850595, guid: 6ee82a91816573743832411a9dd3c7b0, type: 3}
       propertyPath: m_LocalPosition.x

@@ -14,8 +14,7 @@ namespace Player
         private bool _isJoystickMoved;
         private Vector2 _deltaVector2;
         private Player _player;
-
-
+        
         public PlayerInputRouter(CustomJoystick joystick, Player player, ShootButton shootButton)
         {
             _player = player;
