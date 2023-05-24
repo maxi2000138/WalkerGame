@@ -23,7 +23,7 @@ namespace Infrastructure
             _staticDataInstaller.Construct(_serviceLocator.GetService<StaticDataService>());
             _staticDataInstaller.LoadStaticData();
         
-            _gameWorldInstaller.Construct(_serviceLocator.GetService<GameFactory>());
+            _gameWorldInstaller.Construct(_serviceLocator.GetService<GameFactory>(), _serviceLocator.GetService<SaveLoadService>());
             _gameWorldInstaller.InitGameWorld();
         
             _progressInstaller.Construct(

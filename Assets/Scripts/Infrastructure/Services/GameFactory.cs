@@ -24,7 +24,7 @@ namespace Infrastructure.Services
             _staticDataService = staticDataService;
         }
 
-        public Player.Player CreatePlayer(Transform spawnPoint, PlayerTypeId playerTypeId, BulletTypeId bulletTypeId)
+        public Player.Player CreatePlayer(Transform spawnPoint, PlayerTypeId playerTypeId, BulletTypeId bulletTypeId, GameOverPopup gameOverPopup)
         {
             PlayerStaticData staticData = _staticDataService.GetPlayer(playerTypeId);
             GameObject playerObj = Object.Instantiate(staticData.Prefab, spawnPoint.position,
@@ -33,10 +33,10 @@ namespace Infrastructure.Services
             IHealth health = playerObj.GetComponent<IHealth>();
             health.Current = staticData.HP;
             health.Max = staticData.HP;
-            playerObj.GetComponent<ActorUI>().Construct(health);
+            playerObj.GetComponent<HealthUIChanger>().Construct(health);
         
             _player = playerObj.GetComponent<Player.Player>();
-            _player.Construct(staticData, _staticDataService.GetBullet(bulletTypeId));
+            _player.Construct(staticData, _staticDataService.GetBullet(bulletTypeId), gameOverPopup);
         
             RegisterProgressWatchers(playerObj);
 
@@ -52,7 +52,7 @@ namespace Infrastructure.Services
             IHealth health = enemyObj.GetComponent<IHealth>();
             health.Current = enemyStaticData.HP;
             health.Max = enemyStaticData.HP;
-            enemyObj.GetComponent<ActorUI>().Construct(health);
+            enemyObj.GetComponent<HealthUIChanger>().Construct(health);
         
             Enemy.Enemy enemy = enemyObj.GetComponent<Enemy.Enemy>();
             enemy.Construct(_player, enemyStaticData, this);

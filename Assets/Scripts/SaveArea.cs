@@ -1,6 +1,4 @@
-using System;
 using Infrastructure.Services;
-using UnityEditor;
 using UnityEngine;
 
 public class SaveArea : MonoBehaviour

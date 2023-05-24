@@ -6,10 +6,7 @@ namespace Enemy
 {
     public class EnemyHealth : MonoBehaviour, IHealth
     {
-        [SerializeField]
         private float _current;
-
-        [SerializeField]
         private float _max;
 
         public event Action HealthChanged;

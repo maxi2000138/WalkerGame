@@ -1,3 +1,4 @@
+using System;
 using Data.TypeIds;
 using DebugFeatures;
 using Infrastructure.Services;
@@ -18,9 +19,11 @@ public class EnemySpawner : MonoBehaviour
     }
     private void Start()
     {
+        int len = Enum.GetNames(typeof(EnemyTypeId)).Length;
         for (int i = 0; i < _enemyAmount; i++)
         {
-            _gameFactory.CreateEnemy(GetSpawnPoint(), EnemyTypeId.zombie);
+            int spawnType = Random.Range(0, len);
+            _gameFactory.CreateEnemy(GetSpawnPoint(), (EnemyTypeId)spawnType);
         }
     }
 

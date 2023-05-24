@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UI
 {
-    public class ActorUI : MonoBehaviour
+    public class HealthUIChanger : MonoBehaviour
     {
         public HpBar HpBar;
 

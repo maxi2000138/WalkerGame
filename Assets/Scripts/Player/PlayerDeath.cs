@@ -6,7 +6,13 @@ namespace Player
     public class PlayerDeath : MonoBehaviour
     {
         private PlayerHealth _playerHealth;
+        private GameOverPopup _gameOverPopup;
 
+
+        public void Construct(GameOverPopup gameOverPopup)
+        {
+            _gameOverPopup = gameOverPopup;
+        }
         private void Awake()
         {
             _playerHealth = GetComponent<PlayerHealth>();
@@ -25,8 +31,11 @@ namespace Player
 
         private void OnHealthChanged()
         {
-            if(_playerHealth.Current <= 0)
+            if (_playerHealth.Current <= 0)
+            {
+                _gameOverPopup.Show();
                 Destroy(gameObject);
+            }
         }
     }
 }

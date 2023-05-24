@@ -17,16 +17,19 @@ namespace Player
         public PlayerGunRotater PlayerGunRotater { get; private set; }
         public PlayerHealth PlayerHealth { get; private set; }
         
+        public PlayerDeath PlayerDeath { get; private set; }
         public PlayerAimRangeDrawer PlayerAimRangeDrawer{get; private set; }
     
-        public void Construct(PlayerStaticData playerStaticData, BulletStaticData bulletStaticData)
+        public void Construct(PlayerStaticData playerStaticData, BulletStaticData bulletStaticData, GameOverPopup gameOverPopup)
         {
             PlayerMove = GetComponent<PlayerMove>();
             PlayerShoot = GetComponent<PlayerShoot>();
             PlayerGunRotater = GetComponent<PlayerGunRotater>();
             PlayerHealth = GetComponent<PlayerHealth>();
             PlayerAimRangeDrawer = GetComponentInChildren<PlayerAimRangeDrawer>();
+            PlayerDeath = GetComponent<PlayerDeath>();
         
+            PlayerDeath.Construct(gameOverPopup);
             PlayerMove.Construct(playerStaticData.Speed);
             PlayerShoot.Construct(bulletStaticData);
             PlayerGunRotater.Construct(playerStaticData.AutoAimDistance);

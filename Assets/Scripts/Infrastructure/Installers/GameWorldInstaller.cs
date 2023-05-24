@@ -18,16 +18,17 @@ namespace Infrastructure.Installers
         [SerializeField] private InventoryPresenter _inventoryPresenter;
         [SerializeField] private EnemySpawner _enemySpawner;
         [SerializeField] private SaveArea _saveArea;
+        [SerializeField] private GameOverPopup _gameOverPopup;
 
         private PlayerInputRouter _playerInputRouter;
         private Player.Player _player;
         private GameFactory _gameFactory;
+        private SaveLoadService _saveLoadService;
         private const string PlayerSpawnPointTag = "PlayerSpawnPoint";
-        private const string EnemySpawnPointTag = "EnemySpawnPoint";
 
-
-        public void Construct(GameFactory gameFactory)
+        public void Construct(GameFactory gameFactory, SaveLoadService saveLoadService)
         {
+            _saveLoadService = saveLoadService;
             _gameFactory = gameFactory;
         }
 
@@ -38,7 +39,7 @@ namespace Infrastructure.Installers
 
         private void FixedUpdate()
         {
-            _playerInputRouter.Update(Time.deltaTime);
+            _playerInputRouter.Update(Time.fixedDeltaTime);
         }
     
         private void OnDisable()
@@ -48,38 +49,35 @@ namespace Infrastructure.Installers
 
         public void InitGameWorld()
         {
-            _gameFactory.Cleanup();
+            CleanupProgressReadersWriters();
             SpawnPlayer();
             InitSpawner();
-            _saveArea.Construct(ServiceLocator.Container.GetService<SaveLoadService>()); //Delete or переделать!
+            InitSaveArea();
             InitInputRouter();
             CreateAndInitInventory();
         }
 
-        private void InitSpawner()
-        {
+        private void CleanupProgressReadersWriters() => 
+            _gameFactory.Cleanup();
+
+
+        private void InitSaveArea() => 
+            _saveArea.Construct(_saveLoadService);
+
+        private void InitSpawner() => 
             _enemySpawner.Construct(_gameFactory);
-        }
 
         private void CreateAndInitInventory() => 
             _inventoryPresenter.Construct(_gameFactory.CreateInventory());
 
-        private void SpawnZombie()
-        {
-            Transform enemySpawnPoint = GameObject.FindGameObjectWithTag(EnemySpawnPointTag).transform;
-            _gameFactory.CreateEnemy(enemySpawnPoint.position, EnemyTypeId.zombie);
-        }
+        private void InitInputRouter() => 
+            _playerInputRouter = new PlayerInputRouter(_joystick, _player, _shootButton);
 
         private void SpawnPlayer()
         {
             Transform PlayerSpawnPoint = GameObject.FindGameObjectWithTag(PlayerSpawnPointTag).transform;
-            _player = _gameFactory.CreatePlayer(PlayerSpawnPoint, PlayerTypeId.DefaultPlayer, BulletTypeId.DefaultBullet);
+            _player = _gameFactory.CreatePlayer(PlayerSpawnPoint, PlayerTypeId.DefaultPlayer, BulletTypeId.DefaultBullet, _gameOverPopup);
             _camera.Follow = _player.transform;
-        }
-
-        private void InitInputRouter()
-        {
-            _playerInputRouter = new PlayerInputRouter(_joystick, _player, _shootButton);
         }
     }
 }

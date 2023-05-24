@@ -26,6 +26,7 @@ public class GameOverPopup : MonoBehaviour
 
     public void ReplayGame()
     {
+        Close();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
