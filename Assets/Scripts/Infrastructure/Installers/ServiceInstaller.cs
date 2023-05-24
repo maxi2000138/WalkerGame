@@ -7,6 +7,8 @@ namespace Infrastructure.Installers
 {
     public class ServiceInstaller : MonoBehaviour
     {
+        [SerializeField] private Transform _ObjectsSpawnPoint;
+        
         private ServiceLocator _serviceLocator;
 
         public void Construct(ServiceLocator serviceLocator)
@@ -17,7 +19,8 @@ namespace Infrastructure.Installers
         public void RegisterServices()
         {
             _serviceLocator.RegisterService<StaticDataService>(new StaticDataService());        
-            _serviceLocator.RegisterService<GameFactory>(new GameFactory(_serviceLocator.GetService<StaticDataService>()));
+            _serviceLocator.RegisterService<GameFactory>(
+                new GameFactory(_serviceLocator, _ObjectsSpawnPoint));
             _serviceLocator.RegisterService<PersistantProgressService>(new PersistantProgressService());
             _serviceLocator.RegisterService<SaveLoadService>(new SaveLoadService
             (_serviceLocator.GetService<GameFactory>()

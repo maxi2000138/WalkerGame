@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Data.DataObjects;
+using Data.DataStructures;
 using Infrastructure.DI;
 using Infrastructure.Services;
 using Inventory.Model;

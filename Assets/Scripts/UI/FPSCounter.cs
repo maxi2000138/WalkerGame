@@ -1,48 +1,51 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-public class FPSCounter : MonoBehaviour
+namespace UI
 {
-    public TMP_Text fpsText;
-    public float updateInterval = 0.5f;
-
-    private float fpsAccumulator = 0f;
-    private int fpsFrames = 0;
-    private float fpsTime = 0f;
-
-    private void Start()
+    public class FPSCounter : MonoBehaviour
     {
-        if (fpsText == null)
+        public TMP_Text fpsText;
+        public float updateInterval = 0.5f;
+
+        private float fpsAccumulator = 0f;
+        private int fpsFrames = 0;
+        private float fpsTime = 0f;
+
+        private void Start()
         {
-            Debug.LogError("FPSCounter: TextMeshPro Text component not assigned!");
-            enabled = false;
-            return;
+            if (fpsText == null)
+            {
+                Debug.LogError("FPSCounter: TextMeshPro Text component not assigned!");
+                enabled = false;
+                return;
+            }
+
+            fpsTime = updateInterval;
         }
 
-        fpsTime = updateInterval;
-    }
-
-    private void Update()
-    {
-        fpsTime += Time.unscaledDeltaTime;
-        fpsFrames++;
-
-        if (fpsTime >= updateInterval)
+        private void Update()
         {
-            float currentFPS = fpsFrames / fpsTime;
-            fpsAccumulator += currentFPS;
-            fpsFrames = 0;
-            fpsTime = 0f;
+            fpsTime += Time.unscaledDeltaTime;
+            fpsFrames++;
 
-            float averageFPS = fpsAccumulator / updateInterval;
-            fpsAccumulator = 0f;
+            if (fpsTime >= updateInterval)
+            {
+                float currentFPS = fpsFrames / fpsTime;
+                fpsAccumulator += currentFPS;
+                fpsFrames = 0;
+                fpsTime = 0f;
 
-            UpdateFPSDisplay(averageFPS);
+                float averageFPS = fpsAccumulator / updateInterval;
+                fpsAccumulator = 0f;
+
+                UpdateFPSDisplay(averageFPS);
+            }
         }
-    }
 
-    private void UpdateFPSDisplay(float fps)
-    {
-        fpsText.text = $"FPS: {Mathf.RoundToInt(fps)}";
+        private void UpdateFPSDisplay(float fps)
+        {
+            fpsText.text = $"FPS: {Mathf.RoundToInt(fps)}";
+        }
     }
 }

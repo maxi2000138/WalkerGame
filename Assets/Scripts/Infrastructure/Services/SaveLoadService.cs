@@ -1,5 +1,5 @@
 using System.IO;
-using Data.DataObjects;
+using Data.DataStructures;
 using Data.Extensions;
 using Infrastructure.DI;
 using Services;
@@ -20,14 +20,13 @@ namespace Infrastructure.Services
             filePath = Application.persistentDataPath + "/GameData.json";
         }
 
-        public async void ResetProgress(PlayerProgress defaultProgress)
+        public async void ResetProgress()
         {
-            _progressService.PlayerProgress = defaultProgress;
+            _progressService.PlayerProgress = null;
         
             StreamWriter writer = new StreamWriter(filePath, false);
             await writer.WriteAsync(_progressService.PlayerProgress.ToJson());
             writer.Close();
-            Debug.Log(_progressService.PlayerProgress.ToJson() + "\n" + filePath);
         }
 
         public async void SaveProgress()
@@ -38,7 +37,6 @@ namespace Infrastructure.Services
             StreamWriter writer = new StreamWriter(filePath, false);
             await writer.WriteAsync(_progressService.PlayerProgress.ToJson());
             writer.Close();
-            Debug.Log(_progressService.PlayerProgress.ToJson() + "\n" + filePath);
         }
         
         public PlayerProgress LoadProgress()
@@ -48,7 +46,6 @@ namespace Infrastructure.Services
             
             StreamReader reader = new StreamReader(filePath);
             string line = reader.ReadLine();
-            Debug.Log(line.ToDeserialized<PlayerProgress>());
             return line.ToDeserialized<PlayerProgress>();
         }
     }

@@ -3,12 +3,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Inventory.View
+namespace Inventory.Presenter
 {
     public class CellPresenter : MonoBehaviour
     {
         [SerializeField] private Image _iconField;
         [SerializeField] private TextMeshProUGUI _amountField;
+        [SerializeField] private GameObject _amountObject;
         
         private InventoryPresenter _inventoryPresenter;
         private IReadonlyCell _cell;
@@ -21,8 +22,13 @@ namespace Inventory.View
         public void Render(IReadonlyCell cell)
         {
             _cell = cell;
+            
+            if(cell.Count == 1)
+                _amountObject.SetActive(false);
+            else
+                _amountField.text = cell.Count.ToString();
+            
             _iconField.sprite = cell.Item.Icon;
-            _amountField.text = cell.Count.ToString();
         }
 
         public void RemoveItem() => 

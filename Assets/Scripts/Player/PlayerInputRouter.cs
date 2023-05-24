@@ -1,5 +1,5 @@
 using Input;
-using UI;
+using UI.Buttons;
 using UnityEngine;
 
 namespace Player
@@ -28,6 +28,9 @@ namespace Player
 
         public void OnEnable()
         {
+            if(_joystick == null)
+                return;
+            
             _joystick.Enable();
             _joystick.OnJoystickTouchStarted += OnJoysitckTouchStarted;
             _joystick.OnJoystickTouchEnded += OnJoysitckTouchEnded;
@@ -36,7 +39,10 @@ namespace Player
     
         public void OnDisable()
         {
-            _joystick.Enable();
+            if(_joystick == null)
+                return;
+
+            _joystick.Disable();
             _joystick.OnJoystickTouchStarted += OnJoysitckTouchStarted;
             _joystick.OnJoystickTouchEnded += OnJoysitckTouchEnded;
             _shootButton.OnShootButtonClicked -= OnShootButtonClicked;

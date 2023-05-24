@@ -1,32 +1,33 @@
-using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameOverPopup : MonoBehaviour
+namespace GameOver
 {
-    [SerializeField] private Button _button;
-
-    private void OnEnable()
+    public class GameOverPopup : MonoBehaviour
     {
-        _button.onClick.AddListener(ReplayGame);
-    }
+        [SerializeField] private Button _button;
 
-    private void OnDisable()
-    {
-        _button.onClick.RemoveListener(ReplayGame);
-    }
+        private void OnEnable()
+        {
+            _button.onClick.AddListener(ReplayGame);
+        }
 
-    public void Show() => 
-        gameObject.SetActive(true);
+        private void OnDisable()
+        {
+            _button.onClick.RemoveListener(ReplayGame);
+        }
 
-    public void Close() => 
-        gameObject.SetActive(false);
+        public void Show() => 
+            gameObject.SetActive(true);
 
-    public void ReplayGame()
-    {
-        Close();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        public void Close() => 
+            gameObject.SetActive(false);
+
+        public void ReplayGame()
+        {
+            Close();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }

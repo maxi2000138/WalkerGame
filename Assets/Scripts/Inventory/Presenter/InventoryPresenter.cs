@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
 
-namespace Inventory.View
+namespace Inventory.Presenter
 {
     public class InventoryPresenter : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Data.DataObjects;
+using Data.DataStructures;
 using Data.Extensions;
 using Services;
 
@@ -42,6 +42,8 @@ namespace Inventory.Model
             
             if (listCel != null)
                 _cells.Remove(listCel);
+            
+            OnInventoryChanged?.Invoke();
         }
 
         public void LoadProgress(PlayerProgress playerProgress)
@@ -55,7 +57,8 @@ namespace Inventory.Model
 
         public void UpdateProgress(PlayerProgress playerProgress)
         {
-            playerProgress.Inventory.Cells = _cells.ToInventoryDataList();
+            if(_cells != null && playerProgress != null)    
+                playerProgress.Inventory.Cells = _cells.ToInventoryDataList();
         }
     }
 }

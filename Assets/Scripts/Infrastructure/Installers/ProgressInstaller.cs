@@ -1,7 +1,6 @@
-using Data.DataObjects;
+using Data.DataStructures;
 using Infrastructure.Services;
 using Services;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Infrastructure.Installers
@@ -33,26 +32,6 @@ namespace Infrastructure.Installers
 
         private PlayerProgress NewProgress() => 
             new PlayerProgress();
-    
-    
-        [Button]
-        private void SaveProgress()
-        {
-            _saveLoadService.SaveProgress();
-        }
-    
-        [Button]
-        private void LoadProgress()
-        {
-            _saveLoadService.LoadProgress();
-            _gameFactory.ProgressReaders.ForEach((progressReader => progressReader.LoadProgress(_persistantProgressService.PlayerProgress)));
-        }
-    
-        [Button]
-        private void ResetProgress()
-        {
-            _saveLoadService.ResetProgress(null);
-        }
-    
+        
     }
 }

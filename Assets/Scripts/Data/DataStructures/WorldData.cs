@@ -1,7 +1,7 @@
 using System;
 using Data.Extensions;
 
-namespace Data.DataObjects
+namespace Data.DataStructures
 {
     [Serializable]
     public class WorldData

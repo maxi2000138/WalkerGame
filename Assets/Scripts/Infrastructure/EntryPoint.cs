@@ -1,6 +1,7 @@
 using Infrastructure.DI;
 using Infrastructure.Installers;
 using Infrastructure.Services;
+using Player;
 using Services;
 using UnityEngine;
 
@@ -12,8 +13,9 @@ namespace Infrastructure
         [SerializeField] private GameWorldInstaller _gameWorldInstaller;
         [SerializeField] private StaticDataInstaller _staticDataInstaller;
         [SerializeField] private ProgressInstaller _progressInstaller;
+        [SerializeField] private LoadingCurtain _loadingCurtain;
     
-        private ServiceLocator _serviceLocator = ServiceLocator.Container;
+        private readonly ServiceLocator _serviceLocator = ServiceLocator.Container;
     
         private void Awake()
         {
@@ -32,6 +34,8 @@ namespace Infrastructure
                 , _serviceLocator.GetService<SaveLoadService>());
             _progressInstaller.LoadProgressOrInitNew();
             _progressInstaller.InformProgressReaders();
+            
+            _loadingCurtain.Hide();
         }
     }
 }

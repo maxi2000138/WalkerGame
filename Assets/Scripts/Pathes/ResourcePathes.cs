@@ -7,5 +7,6 @@ namespace Pathes
         public const string BulletStaticData = "StaticData/Bullets";
         public const string LootStaticData = "StaticData/Loots";
         public const string LootPrefab = "Prefabs/Loot";
+        public const string DataSaverPrefab = "Prefabs/DataSaver";
     }
 }

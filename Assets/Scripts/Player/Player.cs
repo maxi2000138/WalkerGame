@@ -1,6 +1,7 @@
 using Data.CustomStaticData;
-using Data.DataObjects;
+using Data.DataStructures;
 using Data.Extensions;
+using GameOver;
 using Services;
 using UnityEngine;
 
@@ -16,7 +17,6 @@ namespace Player
         public PlayerShoot PlayerShoot { get; private set; }
         public PlayerGunRotater PlayerGunRotater { get; private set; }
         public PlayerHealth PlayerHealth { get; private set; }
-        
         public PlayerDeath PlayerDeath { get; private set; }
         public PlayerAimRangeDrawer PlayerAimRangeDrawer{get; private set; }
     
@@ -45,7 +45,8 @@ namespace Player
 
         public void UpdateProgress(PlayerProgress playerProgress)
         {
-            playerProgress.WorldData.Position = transform.position.AsVector3Data();
+            if(transform != null && playerProgress != null)
+                playerProgress.WorldData.Position = transform.position.AsVector3Data();
         }
     }
 }

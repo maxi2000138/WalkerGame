@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
-using Inventory.Model;
 
-namespace Data.DataObjects
+namespace Data.DataStructures
 {
     [Serializable]
     public class PlayerProgress
@@ -15,7 +13,7 @@ namespace Data.DataObjects
         {
             WorldData = new WorldData();
             HeroState = new State();
-            Inventory = new InventoryData(new List<IReadonlyCell>());
+            Inventory = new InventoryData();
         }
     }
 }

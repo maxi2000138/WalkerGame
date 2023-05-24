@@ -10,6 +10,7 @@ namespace Enemy
         private float _max;
 
         public event Action HealthChanged;
+        public event Action HealthSeted;
 
         public float Current
         {
@@ -34,6 +35,5 @@ namespace Enemy
             Current -= damage;
             HealthChanged?.Invoke();
         }
-
     }
 }

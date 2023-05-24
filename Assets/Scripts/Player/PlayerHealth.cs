@@ -1,15 +1,17 @@
 using System;
-using Data.DataObjects;
+using Data.DataStructures;
 using HP;
+using Services;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerHealth : MonoBehaviour, IHealth
+    public class PlayerHealth : MonoBehaviour, IHealth, ISavedProgress
     {
         private State _state = new State();
 
         public event Action HealthChanged;
+        public event Action HealthSeted;
 
         public float Current
         {
@@ -34,14 +36,20 @@ namespace Player
 
         public void LoadProgress(PlayerProgress progress)
         {
-            _state = progress.HeroState;
-            HealthChanged?.Invoke();
+            if (progress.HeroState.CurrentHP != 0 && progress.HeroState.MaxHP != 0)
+            {
+                _state = progress.HeroState;
+            }
+            HealthSeted?.Invoke();
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.HeroState.CurrentHP = Current;
-            progress.HeroState.MaxHP = Max;
+            if (progress != null)
+            {
+                progress.HeroState.CurrentHP = Current;
+                progress.HeroState.MaxHP = Max;
+            }
         }
 
         public void TakeDamage(float damage)

@@ -1,5 +1,6 @@
 using Data.CustomStaticData;
 using Infrastructure.Services;
+using Loot;
 using UnityEngine;
 
 namespace Enemy
@@ -8,7 +9,6 @@ namespace Enemy
     {
         public EnemyStateMachine.EnemyStateMachine EnemyStateMachine { get; private set; }
         public EnemyMover EnemyMover { get; private set; }
-        
         public LootSpawner LootSpawner { get; private set; }
     
         public void Construct(Player.Player player, EnemyStaticData staticData, GameFactory gameFactory)

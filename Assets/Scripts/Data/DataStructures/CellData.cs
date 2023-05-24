@@ -2,7 +2,7 @@
 using Data.TypeIds;
 using Inventory.Model;
 
-namespace Data.DataObjects
+namespace Data.DataStructures
 {
     [Serializable]
     public class CellData

@@ -1,3 +1,5 @@
+using System;
+using GameOver;
 using UnityEngine;
 
 namespace Player
@@ -7,6 +9,8 @@ namespace Player
     {
         private PlayerHealth _playerHealth;
         private GameOverPopup _gameOverPopup;
+
+        public event Action Happened;
 
 
         public void Construct(GameOverPopup gameOverPopup)
@@ -33,6 +37,7 @@ namespace Player
         {
             if (_playerHealth.Current <= 0)
             {
+                Happened?.Invoke();
                 _gameOverPopup.Show();
                 Destroy(gameObject);
             }

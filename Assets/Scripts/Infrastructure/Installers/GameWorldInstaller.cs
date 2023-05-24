@@ -1,11 +1,13 @@
 using Cinemachine;
 using Data.TypeIds;
+using Enemy;
+using GameOver;
 using Infrastructure.DI;
 using Infrastructure.Services;
 using Input;
-using Inventory.View;
+using Inventory.Presenter;
 using Player;
-using UI;
+using UI.Buttons;
 using UnityEngine;
 
 namespace Infrastructure.Installers
@@ -17,7 +19,6 @@ namespace Infrastructure.Installers
         [SerializeField] private ShootButton _shootButton;
         [SerializeField] private InventoryPresenter _inventoryPresenter;
         [SerializeField] private EnemySpawner _enemySpawner;
-        [SerializeField] private SaveArea _saveArea;
         [SerializeField] private GameOverPopup _gameOverPopup;
 
         private PlayerInputRouter _playerInputRouter;
@@ -52,18 +53,17 @@ namespace Infrastructure.Installers
             CleanupProgressReadersWriters();
             SpawnPlayer();
             InitSpawner();
-            InitSaveArea();
             InitInputRouter();
             CreateAndInitInventory();
+            SpawnDataSaver();
         }
+
+        private void SpawnDataSaver() => 
+            _gameFactory.SpawnDataSaver();
 
         private void CleanupProgressReadersWriters() => 
             _gameFactory.Cleanup();
-
-
-        private void InitSaveArea() => 
-            _saveArea.Construct(_saveLoadService);
-
+        
         private void InitSpawner() => 
             _enemySpawner.Construct(_gameFactory);
 
@@ -76,7 +76,7 @@ namespace Infrastructure.Installers
         private void SpawnPlayer()
         {
             Transform PlayerSpawnPoint = GameObject.FindGameObjectWithTag(PlayerSpawnPointTag).transform;
-            _player = _gameFactory.CreatePlayer(PlayerSpawnPoint, PlayerTypeId.DefaultPlayer, BulletTypeId.DefaultBullet, _gameOverPopup);
+            _player = _gameFactory.SpawnPlayer(PlayerSpawnPoint, PlayerTypeId.DefaultPlayer, BulletTypeId.DefaultBullet, _gameOverPopup);
             _camera.Follow = _player.transform;
         }
     }

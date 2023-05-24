@@ -1,8 +1,7 @@
-using HP;
 using HP.View;
 using UnityEngine;
 
-namespace UI
+namespace HP
 {
     public class HealthUIChanger : MonoBehaviour
     {
@@ -14,11 +13,13 @@ namespace UI
         {
             _health = health;
             _health.HealthChanged += UpdateHpBar;
+            _health.HealthSeted += UpdateHpBar;
         }
 
         private void OnDestroy()
         {
             _health.HealthChanged -= UpdateHpBar;
+            _health.HealthSeted -= UpdateHpBar;
         }
     
         private void UpdateHpBar()

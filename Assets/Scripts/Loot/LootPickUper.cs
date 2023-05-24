@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class LootPickUper : MonoBehaviour
+namespace Loot
 {
-    public void Construct()
+    public class LootPickUper : MonoBehaviour
     {
+        public void Construct()
+        {
         
+        }
     }
 }

@@ -1,8 +1,8 @@
-using Inventory.View;
+using Inventory.Presenter;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace UI.Buttons
 {
     public class InventoryButton : MonoBehaviour
     {

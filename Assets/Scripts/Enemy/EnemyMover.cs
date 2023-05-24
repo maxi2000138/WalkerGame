@@ -21,6 +21,9 @@ namespace Enemy
 
         public void MoveToPlayer(float deltaTime)
         {
+            if(_playerTransform == null)
+                return;
+            
             Vector2 pos = transform.position + (_playerTransform.position - transform.position).normalized *
                 (_enemySpeed * deltaTime);
             _rigidbody2D.MovePosition(pos);
